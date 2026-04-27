@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>En el principio era el caos — ahora es la jaula</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #131311;
+    --bg-card:    #1a1917;
+    --bg-footer:  #0e0e0c;
+    --text:       #cec9c1;
+    --text-soft:  #a8a299;
+    --text-muted: #6a6560;
+    --text-faint: #3f3c38;
+    --accent:     #c97b4b;
+    --accent-dim: rgba(201,123,75,0.11);
+    --teal:       #4a9b8e;
+    --teal-dim:   rgba(74,155,142,0.09);
+    --rule:       rgba(255,255,248,0.07);
+    --rule-soft:  rgba(255,255,248,0.13);
+  }
+
+  html { font-size: 18px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.95;
+    min-height: 100vh;
+  }
+
+  /* ── masthead ── */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-footer);
+  }
+
+  .masthead-pub {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .masthead-date {
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+
+  /* ── hero ── */
+  .hero {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #eae5dc;
+    margin-bottom: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 2.2vw, 1.12rem);
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+  }
+
+  .byline {
+    font-size: 13px;
+    color: var(--text-muted);
+    border-top: 0.5px solid var(--rule);
+    border-bottom: 0.5px solid var(--rule);
+    padding: 0.75rem 0;
+    font-style: italic;
+  }
+
+  /* ── body ── */
+  .body {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 6rem;
+  }
+
+  .lead {
+    font-size: clamp(0.98rem, 2vw, 1.1rem);
+    line-height: 1.95;
+    color: var(--text-soft);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.1rem, 2.8vw, 1.38rem);
+    font-weight: 500;
+    color: #ddd8cf;
+    margin: 3.5rem 0 1.1rem;
+    line-height: 1.3;
+  }
+
+  p { margin-bottom: 1.5rem; color: var(--text); }
+
+  strong { font-weight: 500; color: #ddd8cf; }
+  em { font-style: italic; }
+
+  /* ── pull quote ── */
+  .pull {
+    border-left: 2px solid var(--accent);
+    padding: 0.4rem 1.5rem;
+    margin: 3rem 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.5vw, 1.22rem);
+    line-height: 1.65;
+    color: var(--text-soft);
+  }
+
+  /* ── boxes ── */
+  .box {
+    border-radius: 6px;
+    padding: 1.6rem 1.75rem;
+    margin: 2.75rem 0;
+  }
+
+  .box-amber {
+    background: var(--accent-dim);
+    border-left: 2px solid var(--accent);
+  }
+
+  .box-teal {
+    background: var(--teal-dim);
+    border-left: 2px solid var(--teal);
+  }
+
+  .box-title {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 1.1rem;
+    font-weight: 400;
+  }
+
+  .box-amber .box-title { color: var(--accent); }
+  .box-teal  .box-title { color: var(--teal); }
+
+  .box p {
+    font-size: 0.9rem;
+    margin-bottom: 0.9rem;
+    color: var(--text-soft);
+    line-height: 1.85;
+  }
+
+  .box p:last-child { margin-bottom: 0; }
+  .box strong { color: var(--text); }
+
+  /* ── divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--rule-soft);
+  }
+
+  .divider span {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* ── lecturas recomendadas ── */
+  .lecturas {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--rule-soft);
+  }
+
+  .lecturas-title {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+
+  .lecturas-intro {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .lecturas-section {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 1.75rem 0 1rem;
+    font-weight: 400;
+  }
+
+  .lecturas ul { list-style: none; padding: 0; margin: 0; }
+
+  .lecturas li {
+    margin-bottom: 1.1rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  .lecturas li:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+  .lecturas a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.88rem;
+    display: block;
+    margin-bottom: 0.2rem;
+    transition: opacity 0.2s;
+    font-style: normal;
+  }
+
+  .lecturas a:hover { opacity: 0.7; }
+
+  .lec-titulo {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    display: block;
+    margin-bottom: 0.2rem;
+    font-style: italic;
+  }
+
+  .lec-label {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    display: block;
+  }
+
+  /* ── animations ── */
+  .body > *, .hero > * {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadein 0.6s ease forwards;
+  }
+
+  .hero > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero > *:nth-child(4) { animation-delay: 0.32s; }
+  .body > *:nth-child(1)  { animation-delay: 0.38s; }
+  .body > *:nth-child(2)  { animation-delay: 0.44s; }
+  .body > *:nth-child(n+3){ animation-delay: 0.50s; }
+
+  @keyframes fadein { to { opacity: 1; transform: translateY(0); } }
+
+  /* ── responsive ── */
+  @media (max-width: 600px) {
+    .masthead { padding: 1rem 1.25rem; }
+    .hero     { padding: 2.5rem 1.25rem 2rem; }
+    .body     { padding: 2rem 1.25rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <span class="masthead-pub">Política, tecnología y poder</span>
+  <span class="masthead-date">2026</span>
+</header>
+
+<section class="hero">
+  <p class="kicker">Tecnología y poder</p>
+  <h1>En el principio era el caos — ahora es la jaula</h1>
+  <p class="subtitle">Algoritmos, miedos y poder: por qué el mundo parece roto y quién se beneficia de eso</p>
+  <p class="byline">Varoufakis diagnosticó el sistema. Da Empoli explicó quién lo usa. Palantir es el desenlace.</p>
+</section>
+
+<main class="body">
+
+  <p class="lead">Algo cambió. No sabemos exactamente cuándo, ni hubo un anuncio oficial. Pero en algún momento de la última década el mundo empezó a funcionar de una manera que las palabras que teníamos ya no alcanzan a describir bien. La política se convirtió en un espectáculo permanente de indignación. Las instituciones parecen cada vez más lentas, más torpes, más incapaces de responder a lo que ocurre. Y mientras tanto, cinco o seis empresas tecnológicas acumulan un poder que no tiene precedente en la historia. No el poder de un ejército ni el de un Estado. Algo diferente, más silencioso y más profundo. Este artículo es un intento de ponerle nombre a eso.</p>
+
+  <h2>El poder ya no es lo que era</h2>
+
+  <p>Durante siglos, el poder tuvo formas reconocibles. El rey que controlaba el ejército. El industrial que controlaba la fábrica. El banco que controlaba el crédito. Distintos en su forma, pero con algo en común: controlaban algo que otros necesitaban para vivir o para producir.</p>
+
+  <p>Hoy ese principio sigue vigente, pero el objeto del control cambió. Lo que controlan Amazon, Google, Meta y Apple no son ejércitos ni fábricas. Controlan el <strong>espacio</strong> donde ocurre la vida moderna.</p>
+
+  <p>Cuando dices que vas a buscar algo, vas a Google. Cuando quieres vender algo, vas a Amazon o Instagram. Cuando quieres comunicarte, vas a WhatsApp. Cuando quieres que te encuentren, tienes que existir en esos espacios. No hay alternativa real de escala comparable.</p>
+
+  <p>El economista griego Yanis Varoufakis lo llama <em>capital nube</em>: un tipo de poder que no produce nada directamente, sino que controla el territorio donde todos los demás producen, venden, se comunican y existen. Y como todo el que controla un territorio, cobra por el acceso.</p>
+
+  <p>Pero hay algo que distingue al capital nube de cualquier monopolio anterior: la <strong>inteligencia artificial</strong>. Una fábrica produce lo mismo todos los días. El capital nube aprende. Cada transacción, cada búsqueda, cada interacción alimenta sistemas de IA que se vuelven progresivamente mejores en predecir, moldear y capturar el comportamiento humano. No es un monopolio estático — es un monopolio que se perfecciona solo, en tiempo real, con los datos que sus propios usuarios le entregan sin saberlo.</p>
+
+  <p>Amazon cobra entre un 15% y un 45% a cada vendedor que usa su plataforma. Apple cobra el 30% de cada transacción en su tienda de aplicaciones. Google cobra por cada clic en sus resultados publicitarios. Nadie negoció esas tarifas en un mercado libre. Son el precio de existir en el único territorio donde vale la pena estar.</p>
+
+  <div class="pull">"El señor feudal no labra la tierra. Solo la posee. Y cobra por dejarte trabajar en ella."</div>
+
+  <p>Varoufakis tiene un nombre para eso: <em>renta feudal</em>. No precio — renta. La diferencia importa. Un precio emerge de la competencia entre alternativas. Una renta la fija quien controla algo que no tiene alternativa. El señor feudal medieval no competía con nadie por la tierra que heredó. Tampoco compite Amazon con nadie por el marketplace que construyó durante veinte años.</p>
+
+  <div class="divider"><span>la jerarquía</span></div>
+
+  <h2>Todos somos siervos — aunque no lo parezca</h2>
+
+  <p>Dentro de este sistema hay una jerarquía que vale la pena ver con claridad.</p>
+
+  <p>En la cima están los dueños del territorio digital. No necesitan producir nada. Solo necesitan que todos los demás dependan de ellos.</p>
+
+  <p>Debajo están quienes construyeron sus negocios dentro de ese territorio: el vendedor que depende de Amazon para llegar a sus clientes, el restaurante que necesita aparecer en Google Maps, el artista que sobrevive gracias al algoritmo de Spotify. Tienen autonomía aparente — pueden decidir qué vender, cómo presentarlo, a qué precio — pero operan bajo las reglas del dueño del territorio, y saben que esas reglas pueden cambiar en cualquier momento sin previo aviso y sin compensación.</p>
+
+  <div class="box box-amber">
+    <p class="box-title">Un ejemplo concreto</p>
+    <p>Entre 2014 y 2016, Facebook decidió que el contenido publicado por empresas y medios ya no llegaría gratis a sus seguidores. Para llegar a la misma audiencia que antes, había que pagar. Miles de negocios que habían construido toda su estrategia sobre ese alcance gratuito quebraron de la noche a la mañana. No hubo recurso legal. No hubo indemnización.</p>
+    <p>El dueño del territorio simplemente cambió las reglas de su feudo. Eso es todo.</p>
+  </div>
+
+  <p>Y en la base están todos los demás: los usuarios comunes. Los que creemos que usamos estas plataformas gratis. No las usamos gratis. Cada búsqueda en Google, cada like en Instagram, cada compra en Amazon genera datos que alimentan sistemas de inteligencia artificial que se vuelven más precisos, más eficientes, más capaces de mantenernos dentro del territorio. Estamos trabajando para el dueño del territorio cada vez que usamos el teléfono — sin saberlo, sin que nos paguen, y encima creyendo que nos están haciendo un favor.</p>
+
+  <p>Pero entregar esos datos no es suficiente para que el sistema funcione de verdad. Necesita algo más: que no podamos dejar de mirarlo.</p>
+
+  <div class="divider"><span>el caos</span></div>
+
+  <h2>El caos no es un accidente</h2>
+
+  <p>Las plataformas no ganan dinero cuando te informas. Ganan dinero cuando te quedas. Y lo que hace que la gente se quede no es la información útil ni el debate sereno. Es la emoción intensa: la rabia, el miedo, la indignación, la sensación de que algo o alguien te amenaza. Los algoritmos — entrenados por inteligencia artificial sobre miles de millones de interacciones — no están diseñados para mostrarte lo más verdadero. Están diseñados para mostrarte lo que más reacciones genera. Y como las reacciones negativas son más intensas que las positivas, el sistema empuja sistemáticamente hacia el conflicto, la polarización y el escándalo.</p>
+
+  <p>El politólogo italiano Giuliano da Empoli pasó años estudiando a los estrategas detrás de los grandes populismos de la última década — los asesores de Trump, los arquitectos del Brexit, los operadores de Orbán en Hungría. Su conclusión es técnica y perturbadora: estos movimientos no ganaron porque tuvieran mejores ideas. Ganaron porque entendieron antes que nadie qué tipo de contenido amplifican los algoritmos — y aprendieron a producirlo industrialmente.</p>
+
+  <p>La forma más obvia es la mentira directa. Circuló masivamente durante años la idea de que los nazis eran en realidad de izquierda, porque el partido de Hitler se llamaba "Nacional Socialista". Es históricamente falso — el nazismo persiguió, encarceló y asesinó a socialistas y comunistas desde su primer día en el poder; fueron enemigos mortales. Pero eso no importa desde el punto de vista del algoritmo. Lo que importa es que esa afirmación genera una reacción emocional fortísima. El algoritmo la amplifica masivamente, gratis, a millones de personas. El que la publicó no pagó nada. El dueño de la plataforma ganó tráfico. La mentira quedó instalada en el debate público.</p>
+
+  <p>Pero hay algo más sofisticado que la mentira directa, y más difícil de refutar: la construcción de <strong>realidades paralelas</strong> a partir de hechos reales amplificados hasta perder toda proporción.</p>
+
+  <p>Chile ofrece dos ejemplos recientes y concretos. Durante la campaña presidencial de 2025, la inseguridad dominó completamente el debate político. Ocho de cada diez chilenos creían que la delincuencia había empeorado gravemente. Los candidatos de derecha construyeron toda su plataforma sobre ese miedo. Incluso la candidata de izquierda se vio obligada a endurecer su discurso para no quedar fuera del debate. El problema es que Chile tiene los índices de criminalidad más bajos de América Latina. El algoritmo no mintió — simplemente seleccionó, repitió y amplificó cada caso violento hasta que la proporción desapareció por completo.</p>
+
+  <p>El segundo ejemplo es más revelador porque el propio Estado participó en él. En 2026, una publicación oficial del Gobierno de Chile utilizó la expresión "Estado en quiebra" para describir la situación fiscal. La frase tuvo que ser desmentida públicamente por el ministro de Hacienda días después — pero para entonces ya había circulado, ya había instalado su carga emocional. La realidad era que Chile tenía deuda pública en torno al 42% del PIB, muy por debajo del promedio de los países desarrollados, con fondos soberanos intactos. No estaba en quiebra. Pero "el Estado en quiebra" no es una descripción técnica: es una clausura del debate. Cuando un país está en quiebra, no hay decisiones que discutir — solo ajustes inevitables.</p>
+
+  <div class="pull">"Los ingenieros del caos no inventaron la polarización. La industrializaron."</div>
+
+  <p>Ese pánico fiscal no nació solo en Chile. Llegó también importado algorítmicamente desde Argentina, donde el gobierno de Milei lleva años construyendo una narrativa de refundación económica radical — la motosierra como símbolo, "el Estado es el problema" como dogma, la austeridad extrema como virtud moral. Esa narrativa viaja por las mismas redes, sin fronteras ni pasaportes. Chile importó el estado emocional de Argentina sin importar su contexto económico real. Argentina tenía una inflación del 200% y una crisis fiscal genuinamente brutal. Chile tenía déficit manejable y fondos de estabilización intactos. Pero la sensación de colapso viajó igual — porque el algoritmo no distingue fronteras ni lee balances fiscales.</p>
+
+  <p>Y una vez instalado ese estado emocional, las propuestas que lo aprovechan encuentran el terreno preparado. Aparece la curva de Laffer: la teoría de que bajar impuestos puede aumentar la recaudación porque el estímulo económico compensaría la reducción de tasas. No es una idea nueva. Reagan la aplicó en los ochenta — la deuda federal se triplicó. Thatcher la implementó en el Reino Unido — el resultado fue la destrucción industrial del norte de Inglaterra y una desigualdad sin precedentes desde la Segunda Guerra Mundial. Trump la repitió en 2017 — el déficit aumentó casi un billón de dólares al año. En los noventa, el FMI la impuso en varios países africanos como condición de financiamiento — lo que llegó fue el desmantelamiento de sistemas de salud y educación que tardaron décadas en reconstruirse.</p>
+
+  <div class="box box-teal">
+    <p class="box-title">Lo notable no es que la receta fracase</p>
+    <p>Lo notable es que siempre reaparece en el mismo momento: cuando el pánico está instalado, cuando la urgencia emocional ha reemplazado al debate técnico, cuando la gente está suficientemente asustada como para aceptar soluciones drásticas sin pedir demasiadas explicaciones.</p>
+    <p>No necesita convencer racionalmente — necesita un estado emocional previo que la haga sonar a sentido común. Y fabricar ese estado emocional es exactamente lo que los ingenieros del caos saben hacer mejor que nadie.</p>
+  </div>
+
+  <p>En Chile ese momento tiene nombre y fecha: el <strong>Plan de Reconstrucción Nacional y Desarrollo Económico y Social</strong>, firmado por el presidente Kast en abril de 2026 e ingresado al Congreso como la batalla legislativa central de su gobierno — conocido también, reveladoramente, como la <em>Ley Miscelánea</em>.</p>
+
+  <p>El nombre oficial habla de reconstruir las zonas afectadas por los incendios de Valparaíso, Ñuble y Biobío. Y efectivamente incluye financiamiento para viviendas dañadas. Pero las 40 medidas del proyecto van mucho más lejos: reducción gradual del impuesto corporativo del 27% al 23%, invariabilidad tributaria por 25 años para inversiones superiores a 50 millones de dólares, y mecanismos de repatriación de capitales desde el exterior con tasas preferenciales.</p>
+
+  <p>Es la curva de Laffer aplicada a una emergencia. Las clases medias y bajas que votaron el miedo que el algoritmo amplificó terminan siendo quienes absorben el costo real de la transformación, mientras los grandes capitales obtienen décadas de certeza tributaria garantizada por ley. El pánico construyó el consenso. El consenso habilitó la reforma. Y la reforma beneficia a quienes nunca necesitaron del pánico para saber lo que querían.</p>
+
+  <div class="divider"><span>la jaula</span></div>
+
+  <h2>La jaula se cierra</h2>
+
+  <p>Hasta aquí, el sistema funciona así: el dueño del territorio extrae renta, el algoritmo necesita agitación para funcionar, y los operadores políticos aprendieron a proveer esa agitación a cambio de amplificación gratuita. Una alianza sin contrato, sin reuniones, sin coordinación explícita. Cada parte hace lo que le conviene, y el resultado es el mundo en que vivimos.</p>
+
+  <p>Pero hay un paso más. Y es el que convierte este sistema en algo cualitativamente más oscuro.</p>
+
+  <p>Si controlas el territorio digital y la inteligencia artificial procesa todo lo que ocurre en él — quién compra qué, quién habla con quién, quién busca qué, qué ideas circulan entre qué grupos — tienes en tus manos la materia prima del control político más sofisticado que haya existido jamás.</p>
+
+  <p><strong>Palantir</strong> es la empresa que convirtió esa materia prima en un producto vendible a los Estados. Fundada con financiamiento inicial de la CIA tras el 11 de septiembre de 2001, nació con la misión de evitar que las fallas de inteligencia que hicieron posibles los atentados volvieran a ocurrir. Desde entonces no ha dejado de crecer — y de redefinir lo que significa hacer la guerra.</p>
+
+  <p>Su sistema central, Maven Smart System, no dispara misiles. Hace algo más eficiente y más perturbador: organiza enormes volúmenes de datos de vigilancia — comunicaciones, movimientos, redes sociales, imágenes satelitales — y los convierte mediante inteligencia artificial en listas de objetivos. En las primeras 24 horas de la Operación Furia Épica contra Irán en febrero de 2026, Israel y Estados Unidos bombardearon más de mil objetivos. Esa escala no es posible sin IA. No es posible sin Palantir.</p>
+
+  <p>En Gaza el papel de la empresa ha sido documentado y denunciado por organizaciones de derechos humanos de todo el mundo. En enero de 2024, apenas meses después del inicio de la ofensiva israelí, Palantir firmó una alianza estratégica con el Ministerio de Defensa de Israel. El propio directorio celebró su primera reunión anual de 2024 en Tel Aviv. "Nuestro trabajo en la región nunca ha sido más vital", declararon públicamente. Ese trabajo incluía proporcionar al ejército israelí su plataforma AIP, capaz de generar planes de batalla y listas de blancos de forma casi automática. El CEO Alex Karp admitió sin eufemismos: "Nuestro producto se usa en ocasiones para matar personas." Más de 70.000 palestinos han muerto en Gaza según cifras confirmadas por la ONU. Varios empleados de Palantir renunciaron antes que seguir siendo parte de eso.</p>
+
+  <p>La misma tecnología opera en Ucrania, en las fronteras de Estados Unidos donde el Departamento de Seguridad Nacional la usa para rastrear personas a deportar, y en los ministerios de defensa de varios países europeos. Hace apenas días, Palantir publicó un manifiesto de 22 puntos llamando a Silicon Valley a ponerse al servicio del complejo militar-industrial: "La élite técnica tiene el deber de participar en la defensa de la nación." "No todas las culturas son iguales." "Una nueva era de disuasión basada en la IA está a punto de comenzar."</p>
+
+  <p>No es una empresa tecnológica. Es la infraestructura operativa de una forma de guerra y control que no existía hace veinte años.</p>
+
+  <p>Lo que Palantir hace visible es la consecuencia lógica de todo lo anterior. El caos que el algoritmo necesitaba para funcionar generó miedo. El miedo generó demanda de orden y seguridad. Y Palantir vende exactamente eso: la capacidad del Estado de usar los datos que los siervos entregaron libremente — creyendo que usaban redes sociales gratis — para clasificarlos, vigilarlos y, cuando sea necesario, eliminarlos.</p>
+
+  <p>El círculo se cierra de una manera que nadie diseñó pero que funciona con una coherencia casi perfecta: la plataforma generó el pánico, el pánico generó la demanda de control, y el control se construye con los datos que la misma plataforma recopiló. Los datos que entregaste libremente, ladrillo a ladrillo, cada vez que deslizaste el dedo por la pantalla.</p>
+
+  <div class="divider"><span>conclusión</span></div>
+
+  <h2>¿Cómo se llama esto?</h2>
+
+  <p>Tecnofeudalismo es el nombre que Varoufakis le da al sistema económico: el territorio digital como nueva tierra feudal, la renta como nuevo tributo, los usuarios como nuevos siervos.</p>
+
+  <p>Tecnofascismo es el nombre que algunos empiezan a usar para lo que viene después: la fusión del poder del territorio digital con el poder coercitivo del Estado, en una alianza que ya no necesita elecciones para perpetuarse ni mercados para legitimarse. Palantir no es una metáfora de ese proceso — es su expresión más concreta y más documentada.</p>
+
+  <p>Son hipótesis, no certezas. Pero son hipótesis que cada año que pasa requieren menos imaginación para visualizarse.</p>
+
+  <p>Lo que sí es cierto es que las palabras que teníamos — capitalismo, democracia, mercado libre, izquierda, derecha — no alcanzan para describir lo que está ocurriendo. No porque sean palabras equivocadas, sino porque fueron diseñadas para un mundo que ya no existe.</p>
+
+  <p>En el principio era el caos. Eso ya lo sabemos. La pregunta que queda — la única que importa — es quién decide qué viene después.</p>
+
+  <div class="lecturas">
+    <p class="lecturas-title">Lecturas recomendadas</p>
+    <p class="lecturas-intro">Los argumentos de este ensayo se construyen sobre estas fuentes — libros y conversaciones que vale la pena buscar.</p>
+
+    <p class="lecturas-section">Libros</p>
+    <ul>
+      <li>
+        <span class="lec-titulo">Tecnofeudalismo — Yanis Varoufakis (2023)</span>
+        <span class="lec-label">El economista griego que fue ministro de finanzas y enfrentó a la troika europea argumenta que el capitalismo ya murió — reemplazado silenciosamente por un nuevo sistema donde las grandes plataformas digitales funcionan como señores feudales del siglo XXI.</span>
+      </li>
+      <li>
+        <span class="lec-titulo">Los ingenieros del caos — Giuliano da Empoli (2019)</span>
+        <span class="lec-label">El politólogo italiano que estudió durante años a los estrategas más oscuros de la política contemporánea: los asesores de Trump, Bannon, Surkov, Casaleggio. Su conclusión es técnica y perturbadora — y explica cómo el caos se convirtió en una herramienta de poder.</span>
+      </li>
+    </ul>
+
+    <p class="lecturas-section">Para saber más sobre Palantir</p>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=qX_V-k4JaiI" target="_blank">One AI to rule them all — La Base / Canal Red</a>
+        <span class="lec-label">Manu Levin, Irene Zugasti y Laura Arroyo analizan Palantir y su rol en la industria militar global. Con Ekaitz Cancela, autor de <em>Utopías digitales</em>. (Mar 2026)</span>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Qb2Lwl1mN-U" target="_blank">Palantir, el ojo del imperio que lo vigila todo — La Base Latam</a>
+        <span class="lec-label">De la CIA a Silicon Valley, de Gaza al ICE: cómo Palantir vende vigilancia, clasificación de personas y herramientas de control estatal. (Abr 2026)</span>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=SdNhMVffyAo" target="_blank">Palantir y su manifiesto: del software a la ideología — DW Tecnología</a>
+        <span class="lec-label">El manifiesto viral de Palantir en 22 puntos: IA como disuasión, tecnología al servicio del poder estatal y vigilancia casi ilimitada. (Abr 2026)</span>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Uxj6L7Gg9hI" target="_blank">Las tropelías de Palantir: ¿a qué vino Peter Thiel? — Futurock FM</a>
+        <span class="lec-label">Análisis del rol de Peter Thiel y Palantir en Argentina y América Latina. Con Juan Felipe Salguero en Paraíso Artificial. (Abr 2026)</span>
+      </li>
+    </ul>
+  </div>
+
+</main>
+
+</body>
+</html>
